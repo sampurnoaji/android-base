@@ -26,12 +26,12 @@ class SplashFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (activity as MainActivity).hideBottomNavigation()
         (activity as MainActivity).hideStatusBar()
+        (activity as MainActivity).hideBottomNavigation()
     }
 
     override fun onDetach() {
-        (activity as MainActivity).showStatusBar()
         super.onDetach()
+        (activity as MainActivity).showStatusBar()
     }
 }

@@ -28,7 +28,7 @@ class AlertBottomSheetFragment : BottomSheetDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_MaterialComponents_BottomSheetDialog)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_Design_BottomSheetDialog)
     }
 
     override fun onCreateView(

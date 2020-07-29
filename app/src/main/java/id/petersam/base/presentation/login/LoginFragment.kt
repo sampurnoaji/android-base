@@ -8,6 +8,7 @@ import id.petersam.base.data.vo.HttpResult
 import id.petersam.base.data.vo.LoadResult
 import id.petersam.base.databinding.FragmentLoginBinding
 import id.petersam.base.external.base.BaseFragment
+import id.petersam.base.presentation.MainActivity
 import id.petersam.base.presentation.util.gone
 import id.petersam.base.presentation.util.navigateTo
 import id.petersam.base.presentation.util.snackBar
@@ -20,10 +21,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupToolbar()
         checkLoginState()
         observeLoginResult()
 
         binding.fabLogin.setOnClickListener { onButtonLoginPressed() }
+    }
+
+    private fun setupToolbar() {
+        (activity as MainActivity).hideToolbar()
     }
 
     private fun checkLoginState() {
@@ -62,6 +68,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>() {
     }
 
     private fun onButtonLoginPressed() {
-        vm.login("username", "password")
+//        vm.login("username", "password")
+        navigateTo(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
     }
 }

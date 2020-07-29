@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import id.petersam.base.R
+import id.petersam.base.presentation.util.navigateTo
 
 class GalleryFragment : Fragment() {
 
@@ -13,7 +15,14 @@ class GalleryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
+        requireActivity().onBackPressedDispatcher.addCallback(object :
+            OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                navigateTo(GalleryFragmentDirections.actionGalleryFragmentPopIncludingAccountFragment())
+            }
+        })
+
         return inflater.inflate(R.layout.fragment_gallery, container, false)
     }
 }
