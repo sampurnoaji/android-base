@@ -13,7 +13,9 @@ interface ApiService {
     suspend fun login(@Body request: LoginRequest): LoginDto
 
     @GET("search/repositories?sort=stars")
-    suspend fun searchRepos(
-        @Query("q") query: String
+    suspend fun searchGithubRepos(
+        @Query("q") query: String,
+        @Query("page") page: Int,
+        @Query("per_page") size: Int
     ): GithubDto
 }

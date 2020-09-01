@@ -27,8 +27,8 @@ class UserRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun searchRepos(query: String): LoadResult<List<GithubRepo>> {
-        return when (val apiResult = remoteDataSource.searchRepo(dispatcher.io, query)) {
+    override suspend fun searchRepos(query: String, page: Int, size: Int): LoadResult<List<GithubRepo>> {
+        return when (val apiResult = remoteDataSource.searchGithubRepos(dispatcher.io, query, page, size)) {
             is LoadResult.Success -> LoadResult.Success(githubRepoMapper.map(apiResult.data))
             is LoadResult.Error -> LoadResult.Error(apiResult.cause, apiResult.code, apiResult.errorMessage)
             else -> LoadResult.Error()

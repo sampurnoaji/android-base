@@ -14,7 +14,7 @@ class UserRemoteDataSource @Inject constructor(private val service: ApiService) 
         return safeApiCall(dispatcher) { service.login(request) }
     }
 
-    suspend fun searchRepo(dispatcher: CoroutineDispatcher, query: String): LoadResult<GithubDto> {
-        return safeApiCall(dispatcher) { service.searchRepos(query) }
+    suspend fun searchGithubRepos(dispatcher: CoroutineDispatcher, query: String, page: Int, size: Int): LoadResult<GithubDto> {
+        return safeApiCall(dispatcher) { service.searchGithubRepos(query, page, size) }
     }
 }

@@ -7,7 +7,7 @@ import id.petersam.base.domain.entity.LoginData
 
 interface UserRepository {
     suspend fun login(request: LoginRequest): LoadResult<LoginData>
-    suspend fun searchRepos(query: String): LoadResult<List<GithubRepo>>
+    suspend fun searchRepos(query: String, page: Int, size: Int): LoadResult<List<GithubRepo>>
 
     fun setLoggedIn(isLoggedIn: Boolean)
     fun saveUserSession(name: String, token: String)
