@@ -12,6 +12,7 @@ buildscript {
         version_glide = "4.11.0"
         version_room = "2.2.5"
         version_dagger = "2.24"
+        version_paging = "2.1.2"
     }
     repositories {
         google()
