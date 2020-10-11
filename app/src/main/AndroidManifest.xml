@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="id.petersam.base.MyApplication"
+        android:name="id.petersam.core.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,8 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name="id.petersam.base.presentation.MainActivity">
+        <activity android:name=".NewMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
