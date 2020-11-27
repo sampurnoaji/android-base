@@ -1,0 +1,62 @@
+import id.petersam.buildsrc.BuildAndroidConfig
+import id.petersam.buildsrc.BuildModules
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id "androidx.navigation.safeargs.kotlin"
+}
+
+android {
+    compileSdkVersion BuildAndroidConfig.COMPILE_SDK_VERSION
+    buildToolsVersion BuildAndroidConfig.BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion BuildAndroidConfig.MIN_SDK_VERSION
+        targetSdkVersion BuildAndroidConfig.TARGET_SDK_VERSION
+        versionCode BuildAndroidConfig.VERSION_CODE
+        versionName BuildAndroidConfig.VERSION_NAME
+
+        testInstrumentationRunner BuildAndroidConfig.TEST_INSTRUMENTATION_RUNNER
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        develop {
+            dimension "version"
+            resValue "string", "app_name", "Base Dev"
+            buildConfigField "String", "API_BASE_URL", API_BASE_URL_DEV
+        }
+        staging {
+            dimension "version"
+            resValue "string", "app_name", "Base Staging"
+            buildConfigField "String", "API_BASE_URL", API_BASE_URL_STAGING
+        }
+        production {
+            dimension "version"
+            resValue "string", "app_name", "Base"
+            buildConfigField "String", "API_BASE_URL", API_BASE_URL
+        }
+    }
+}
+
+dependencies {
+    implementation project(BuildModules.CORE)
+    implementation project(BuildModules.Commons.VIEWS)
+    implementation project(BuildModules.Commons.UI)
+}

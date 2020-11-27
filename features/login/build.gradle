@@ -1,0 +1,69 @@
+import id.petersam.buildsrc.BuildAndroidConfig
+import id.petersam.buildsrc.BuildModules
+import id.petersam.buildsrc.dependencies.AnnotationProcessorsDependencies
+import id.petersam.buildsrc.dependencies.Dependencies
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+android {
+    compileSdkVersion BuildAndroidConfig.COMPILE_SDK_VERSION
+    buildToolsVersion BuildAndroidConfig.BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion BuildAndroidConfig.MIN_SDK_VERSION
+        targetSdkVersion BuildAndroidConfig.TARGET_SDK_VERSION
+        versionCode BuildAndroidConfig.VERSION_CODE
+        versionName BuildAndroidConfig.VERSION_NAME
+
+        testInstrumentationRunner BuildAndroidConfig.TEST_INSTRUMENTATION_RUNNER
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+        release {
+            debuggable false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "version"
+    productFlavors {
+        develop {
+            dimension "version"
+            resValue "string", "app_name", "Base Dev"
+            buildConfigField "String", "API_BASE_URL", API_BASE_URL_DEV
+        }
+        staging {
+            dimension "version"
+            resValue "string", "app_name", "Base Staging"
+            buildConfigField "String", "API_BASE_URL", API_BASE_URL_STAGING
+        }
+        production {
+            dimension "version"
+            resValue "string", "app_name", "Base"
+            buildConfigField "String", "API_BASE_URL", API_BASE_URL
+        }
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+    implementation project(BuildModules.CORE)
+    implementation project(BuildModules.Commons.VIEWS)
+    implementation project(BuildModules.Commons.UI)
+
+    implementation Dependencies.LIFECYCLE_EXTENSIONS
+
+    kapt AnnotationProcessorsDependencies.DAGGER
+}
