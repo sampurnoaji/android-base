@@ -1,13 +1,11 @@
 import id.petersam.buildsrc.BuildAndroidConfig
 import id.petersam.buildsrc.BuildModules
-import id.petersam.buildsrc.dependencies.AnnotationProcessorsDependencies
-import id.petersam.buildsrc.dependencies.Dependencies
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs.kotlin"
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id "androidx.navigation.safeargs.kotlin"
+}
 
 android {
     compileSdkVersion BuildAndroidConfig.COMPILE_SDK_VERSION
@@ -24,14 +22,17 @@ android {
     }
 
     buildTypes {
-        debug {
-            debuggable true
-        }
         release {
-            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 
     flavorDimensions "version"
@@ -52,18 +53,10 @@ android {
             buildConfigField "String", "API_BASE_URL", API_BASE_URL
         }
     }
-
-    buildFeatures {
-        dataBinding = true
-    }
 }
 
 dependencies {
     implementation project(BuildModules.CORE)
     implementation project(BuildModules.Commons.VIEWS)
     implementation project(BuildModules.Commons.UI)
-
-    implementation Dependencies.LIFECYCLE_EXTENSIONS
-
-    kapt AnnotationProcessorsDependencies.DAGGER
 }

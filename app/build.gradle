@@ -62,12 +62,19 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
     implementation project(BuildModules.CORE)
     implementation project(BuildModules.Features.LOGIN)
+    implementation project(BuildModules.Features.HOME)
 
     implementation Dependencies.CONSTRAINT_LAYOUT
     implementation Dependencies.NAVIGATION_FRAGMENT
+    implementation Dependencies.NAVIGATION_UI
+    implementation Dependencies.MATERIAL
 }

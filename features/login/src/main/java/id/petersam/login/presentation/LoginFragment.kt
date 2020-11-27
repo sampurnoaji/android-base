@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import id.petersam.core.MyApplication
 import id.petersam.core.vo.LoadResult
 import id.petersam.login.R
@@ -51,6 +52,7 @@ class LoginFragment : Fragment() {
                 }
                 is LoadResult.Error -> {
                     pbLogin.gone()
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                 }
             }
         })

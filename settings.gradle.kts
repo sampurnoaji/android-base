@@ -1,3 +1,4 @@
+include(":features:home")
 include(":commons:views")
 include(":commons:ui")
 include(":commons")

@@ -6,6 +6,7 @@ object BuildModules {
 
     object Features {
         const val LOGIN = ":features:login"
+        const val HOME = ":features:home"
     }
 
     object Commons {
